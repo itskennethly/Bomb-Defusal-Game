@@ -1,4 +1,4 @@
-module Seven_Segment_Patterns(digit, HEX0);
+module SevenSegmentPatterns(digit, HEX0);
     input [3:0] digit;
     output [6:0] HEX0;
 
