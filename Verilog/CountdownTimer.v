@@ -1,4 +1,4 @@
-module countdown_timer (
+module CountdownTimer (
    input MAX10_CLK1_50,  //50 MHz clock from the FPGA
    input [1:0] KEY, // Two push buttons
    input enable, //Starts ir pause countdown
