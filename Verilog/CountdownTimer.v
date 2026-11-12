@@ -1,3 +1,6 @@
+*.v linguist-language=Verilog
+*.sv linguist-language=SystemVerilog
+
 module CountdownTimer (
    input MAX10_CLK1_50,  //50 MHz clock from the FPGA
    input [1:0] KEY, // Two push buttons
