@@ -2,3 +2,5 @@
 * text=auto
 
 *.v linguist-language=Verilog
+*.sv linguist-language=SystemVerilog
+*.v linguist-detectable=true
