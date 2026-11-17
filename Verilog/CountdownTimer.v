@@ -46,15 +46,17 @@ module CountdownTimer (
         end
     end
 end
-Seven_Segment_Patterns display_tens (
+SevenSegmentPatterns display_tens (
     .digit(tens),
     .HEX0(HEX1[6:0])
 );
 
-Seven_Segment_Patterns display_ones (
+SevenSegmentPatterns display_ones (
     .digit(ones),
     .HEX0(HEX0[6:0])
 );
 
 assign HEX1[7] = 1'b1;
 assign HEX0[7] = 1'b1;
+
+endmodule
