@@ -10,42 +10,37 @@ module CountdownTimer (
     wire clk = MAX10_CLK1_50; //Clock Connection
     wire reset_sig = ~KEY[0]; //Reset signal when KEY0 is pressed becomes 1
 
-    reg [25:0] clk_div_counter = 0; //Counts clock cycles
-    reg clk_1hz = 0; // Stores the slower clock
-        
+   wire [12:0] seconds_left;
+   wire time_up;
+   wire expires_now;
+   game_countdown #(
+      .CLOCK_HZ(50000000),
+        .START_SECONDS(60)
+   ) timer (
+      .clk(clk),
+      .reset(reset_sig),
+      .run(enable && !bomb_exploded),
+      .seconds_left(seconds_left),
+      .time_up(time_up),
+      .expires_now(expires_now)
+    );
     
-        always @(posedge clk) begin
-        if (clk_div_counter >= 24999999) begin
-            clk_div_counter <= 0;
-            clk_1hz <= ~clk_1hz;
-        end else begin
-            clk_div_counter <= clk_div_counter + 1;
-        end
-    end
-    /*By changing the d_ number values you change whats in the tens and ones place 
-    so that means if its d9 it would start at 90 for this*/
-    reg[3:0] tens = 4'd6;  
-    reg[3:0] ones = 4'd0;
+   // Convert remaining seconds into decimal digits
+    wire [3:0] tens;
+    wire [3:0] ones;
 
-    always @(posedge clk_1hz or posedge reset_sig) begin
-    if(reset_sig)begin
-        tens <= 4'd6;
-        ones <=4'd0;
-        bomb_exploded <= 0;
-    end
-    else if (enable && !bomb_exploded) begin
-        if (tens == 0 && ones == 0) begin
+    assign tens = seconds_left / 10;
+    assign ones = seconds_left % 10;
+
+    // Detect when countdown reaches zero
+    always @(posedge clk or posedge reset_sig) begin
+        if (reset_sig) begin
+            bomb_exploded <= 0;
+        end
+        else if (expires_now || time_up) begin
             bomb_exploded <= 1;
         end
-        else if (ones == 0) begin
-            tens <= tens -1;
-            ones <= 9;
-        end
-        else begin
-            ones <= ones -1;
-        end
     end
-end
 SevenSegmentPatterns display_tens (
     .digit(tens),
     .HEX0(HEX1[6:0])
