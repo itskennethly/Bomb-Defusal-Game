@@ -217,7 +217,7 @@ module BombDefusal #(
     wire [3:0] pin_red, pin_green, pin_blue;
     wire pin_hs, pin_vs;
 
-    pin_vga pin_video (
+    PinVga pin_video (
         .clk(MAX10_CLK1_50), .reset(reset), .screen(pin_screen),
         .guess_digits(guess_digits), .confirmed_boxes(confirmed_boxes),
         .current_box(current_box), .feedback(feedback),
