@@ -87,6 +87,8 @@ module PinVga (
     assign hs = !(x >= 656 && x < 752);
     assign vs = !(y >= 490 && y < 492);
 
+	// Each character is represented by a 5x7 pixel pattern.
+	
     function [34:0] glyph;
         input [7:0] letter;
         begin
@@ -152,6 +154,7 @@ module PinVga (
     integer box_left, box_status, box_digit;
     integer column, row, position;
 
+	//Text displayed on current game screen
     always @(*) begin
         title_text = "CRACK THE PIN                   ";
 		  help_text  = "KEY1 SCROLL KEY0 CONFIRM        ";
