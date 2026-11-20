@@ -192,7 +192,7 @@ module BombDefusal #(
     wire [11:0] feedback;
     wire reviewing, pin_ready;
 
-    pin_game pin_stage (
+    PinGame pin_stage (
         .clk(MAX10_CLK1_50), .reset(reset),
         .active(stage == PIN || stage == NEXT_MEMORY || stage == MEMORY || stage == DEFUSED),
         .scroll(scroll), .confirm(confirm),
