@@ -28,8 +28,9 @@ module CountdownTimer #(
                 seconds_left <= seconds_left - 1'b1;
                 clock_count <= 0;
             end
-            else
+            else begin
                 clock_count <= clock_count + 1'b1;
             end
         end
+    end
 endmodule
