@@ -173,7 +173,7 @@ module BombDefusal #(
     // Do NOT reset its VGA renderer between games.
     wire [9:0] memory_switches = SW;
 
-    memory_game #(
+    MemoryGame #(
         .FILTER_CYCLES(FILTER_CYCLES), .SHOW_CYCLES(SHOW_CYCLES),
         .GAP_CYCLES(GAP_CYCLES), .RESULT_CYCLES(RESULT_CYCLES)
     ) memory_stage (
